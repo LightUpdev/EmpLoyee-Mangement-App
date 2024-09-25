@@ -10,6 +10,18 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 
 dotenv.config();
 
+// create PORT for server
+const PORT = process.env.PORT || 8000;
+
+if (process.env.NODE_ENV === "production") {
+  // Serve static files from the React app (frontend build folder)
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  // Handle all other routes and return the index.html file
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+  });
+}
 // home route
 app.get("/", (req, res) => {
   res.send("Employee management server is running");
@@ -21,19 +33,6 @@ app.use(bodyParser.json());
 
 // employee middleware route
 app.use("/api/employee", employeeRoute);
-
-// create PORT for server
-const PORT = process.env.PORT || 8000;
-
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from the React app
-  app.use(express.static(path.join(__dirname, "frontend/build")));
-
-  // The catch-all handler for any other routes
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-  });
-}
 
 const connectToMongoDB = () => {
   mongoose
