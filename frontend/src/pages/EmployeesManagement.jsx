@@ -18,7 +18,8 @@ const EmployeeManagement = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false); // Modal visibility state
   const [employeeToEdit, setEmployeeToEdit] = useState(null); // Employee selected for editing
 
-  const baseUrl = "http://localhost:8000/api/employee";
+  const baseUrl =
+    "https://employee-mangement-app-backend.onrender.com/api/employee";
 
   // Fetch employees
   const fetchEmployees = useCallback(async () => {
