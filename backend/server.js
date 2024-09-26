@@ -10,6 +10,18 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 
 dotenv.config();
 
+// home route
+app.get("/", (req, res) => {
+  res.send("Employee management server is running");
+});
+
+// middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// employee middleware route
+app.use("/api/employee", employeeRoute);
+
 // create PORT for server
 const PORT = process.env.PORT || 8000;
 
@@ -22,17 +34,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
   });
 }
-// home route
-app.get("/", (req, res) => {
-  res.send("Employee management server is running");
-});
-
-// middleware
-app.use(cors());
-app.use(bodyParser.json());
-
-// employee middleware route
-app.use("/api/employee", employeeRoute);
 
 const connectToMongoDB = () => {
   mongoose
