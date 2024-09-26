@@ -9,12 +9,6 @@ const employeeRoute = require("./routes/employeeRoute");
 const { errorHandler } = require("./middleware/errorMiddleware");
 
 dotenv.config();
-
-// home route
-app.get("/", (req, res) => {
-  res.send("Employee management server is running");
-});
-
 // middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -34,6 +28,11 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
   });
 }
+
+// home route
+app.get("/", (req, res) => {
+  res.send("Employee management server is running");
+});
 
 const connectToMongoDB = () => {
   mongoose
