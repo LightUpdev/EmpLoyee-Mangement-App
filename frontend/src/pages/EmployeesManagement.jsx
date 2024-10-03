@@ -18,7 +18,8 @@ const EmployeeManagement = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false); // Modal visibility state
   const [employeeToEdit, setEmployeeToEdit] = useState(null); // Employee selected for editing
 
-  const baseUrl = "http://localhost:8000/api/employee";
+  const baseUrl =
+    "https://employee-mangement-app-backend.onrender.com/api/employee";
 
   // Fetch employees
   const fetchEmployees = useCallback(async () => {
@@ -107,20 +108,32 @@ const EmployeeManagement = () => {
 
       {/* Employee List */}
       {!showForm && (
-        <EmployeeList
-          employees={employees}
-          onEditEmployee={handleEditEmployee} // Trigger the modal on edit
-          onDeleteEmployee={handleDeleteEmployee}
-        />
+        <>
+          {employees.length !== 0 ? (
+            <EmployeeList
+              employees={employees}
+              onEditEmployee={handleEditEmployee} // Trigger the modal on edit
+              onDeleteEmployee={handleDeleteEmployee}
+            />
+          ) : (
+            <h2 className="text-center">Loading...</h2>
+          )}
+        </>
       )}
 
       {/* Pagination Controls */}
       {!showForm && (
-        <PaginationControls
-          page={page}
-          totalPages={totalPages}
-          onPageChange={setPage}
-        />
+        <>
+          {employees.length !== 0 ? (
+            <PaginationControls
+              page={page}
+              totalPages={totalPages}
+              onPageChange={setPage}
+            />
+          ) : (
+            ""
+          )}
+        </>
       )}
 
       {/* Update Employee Modal */}
