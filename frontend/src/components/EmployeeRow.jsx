@@ -15,13 +15,13 @@ const EmployeeRow = ({ employee, onEditEmployee, onDeleteEmployee }) => {
           className="btn btn-warning mx-3"
           onClick={() => onEditEmployee(employee)}
         >
-          Edit
+          <i class="bi bi-pencil-fill"></i>
         </button>
         <button
           className="btn btn-danger"
           onClick={() => onDeleteEmployee(employee._id)}
         >
-          Delete
+          <i class="bi bi-trash3-fill"></i>
         </button>
       </td>
     </tr>
